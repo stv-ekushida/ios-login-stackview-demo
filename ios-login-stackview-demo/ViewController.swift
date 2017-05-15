@@ -8,18 +8,48 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var emailErrorLabel: UILabel!
+    @IBOutlet weak var passwordErrorLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        showEmailErrorLabel(isHidden: true)
+        showPasswordErrorLabel(isHidden: true)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func didTapLoginbutton(_ sender: UIButton) {
+
+        if let isEmpty = emailTextField.text?.isEmpty {
+            showEmailErrorLabel(isHidden: !isEmpty)
+        }
+
+        if let isEmpty = passwordTextField.text?.isEmpty {
+            showPasswordErrorLabel(isHidden: !isEmpty)
+        }
     }
 
+    /// Emailのバリデーションチェックエラーラベルの表示切り替え
+    ///
+    /// - Parameter isHidden: 表示/非表示
+    func showEmailErrorLabel(isHidden: Bool) {
 
+        UIView.animate(withDuration: 0.75) { 
+            self.emailErrorLabel.isHidden = isHidden
+        }
+    }
+
+    /// Emailのバリデーションチェックエラーラベルの表示切り替え
+    ///
+    /// - Parameter isHidden: 表示/非表示
+    func showPasswordErrorLabel(isHidden: Bool) {
+
+        UIView.animate(withDuration: 0.75) {
+            self.passwordErrorLabel.isHidden = isHidden
+        }
+    }
 }
-
